@@ -1,0 +1,30 @@
+{
+  "name": "js-autocomplete",
+  "version": "1.0.0",
+  "description": "Pixabay JavaScript-autoComplete",
+  "main": "auto-complete.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RasCarlito/JavaScript-autoComplete.git"
+  },
+  "keywords": [
+    "autocomplete",
+    "autosuggest",
+    "autosuggester",
+    "suggest",
+    "suggester",
+    "completer",
+    "select",
+    "dropdown",
+    "ajax"
+  ],
+  "author": "Pixabay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RasCarlito/JavaScript-autoComplete/issues"
+  },
+  "homepage": "https://github.com/RasCarlito/JavaScript-autoComplete#readme"
+}
