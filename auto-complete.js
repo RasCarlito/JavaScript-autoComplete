@@ -114,8 +114,10 @@ var autoComplete = (function(){
             };
             addEvent(that, 'blur', that.blurHandler);
 
-            var suggest = function(data){
-                var val = that.value;
+            var suggest = function(data, val){
+                if (!val) {
+                    var val = that.value;
+                }
                 that.cache[val] = data;
                 if (data.length && val.length >= o.minChars) {
                     var s = '';
@@ -152,6 +154,9 @@ var autoComplete = (function(){
                 else if (key == 27) { that.value = that.last_val; that.sc.style.display = 'none'; }
                 // enter
                 else if (key == 13 || key == 9) {
+                    if (that.sc.style.display !== 'none') {
+                        e.preventDefault();
+                    }
                     var sel = that.sc.querySelector('.autocomplete-suggestion.selected');
                     if (sel && that.sc.style.display != 'none') { o.onSelect(e, sel.getAttribute('data-val'), sel); setTimeout(function(){ that.sc.style.display = 'none'; }, 20); }
                 }
