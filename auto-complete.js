@@ -68,6 +68,7 @@ var autoComplete = (function(){
                 that.sc.style.width = Math.round(rect.right - rect.left) + 'px'; // outerWidth
                 if (!resize) {
                     that.sc.style.display = 'block';
+                    that.sc.classList.remove('hide')
                     if (!that.sc.maxHeight) { that.sc.maxHeight = parseInt((window.getComputedStyle ? getComputedStyle(that.sc, null) : that.sc.currentStyle).maxHeight); }
                     if (!that.sc.suggestionHeight) that.sc.suggestionHeight = that.sc.querySelector('.autocomplete-suggestion').offsetHeight;
                     if (that.sc.suggestionHeight)
@@ -101,6 +102,8 @@ var autoComplete = (function(){
                     that.value = v;
                     o.onSelect(e, v, this);
                     that.sc.style.display = 'none';
+                    that.sc.classList.add("hide");
+
                 }
             }, that.sc);
 
@@ -109,7 +112,11 @@ var autoComplete = (function(){
                 if (!over_sb) {
                     that.last_val = that.value;
                     that.sc.style.display = 'none';
-                    setTimeout(function(){ that.sc.style.display = 'none'; }, 350); // hide suggestions on fast input
+                    that.sc.classList.add("hide");
+                    setTimeout(function(){
+                      that.sc.style.display = 'none';
+                      that.sc.classList.add("hide");
+                    }, 350); // hide suggestions on fast input
                 } else if (that !== document.activeElement) setTimeout(function(){ that.focus(); }, 20);
             };
             addEvent(that, 'blur', that.blurHandler);
@@ -127,6 +134,7 @@ var autoComplete = (function(){
                 }
                 else
                     that.sc.style.display = 'none';
+                    that.sc.classList.add("hide");
             }
 
             that.keydownHandler = function(e){
@@ -151,14 +159,23 @@ var autoComplete = (function(){
                     return false;
                 }
                 // esc
-                else if (key == 27) { that.value = that.last_val; that.sc.style.display = 'none'; }
+                else if (key == 27) {
+                  that.value = that.last_val;
+                  that.sc.style.display = 'none';
+                  that.sc.classList.add("hide");
+                }
                 // enter
                 else if (key == 13 || key == 9) {
                     if (that.sc.style.display !== 'none') {
                         e.preventDefault();
                     }
                     var sel = that.sc.querySelector('.autocomplete-suggestion.selected');
-                    if (sel && that.sc.style.display != 'none') { o.onSelect(e, sel.getAttribute('data-val'), sel); setTimeout(function(){ that.sc.style.display = 'none'; }, 20); }
+                    if (sel && that.sc.style.display != 'none') {
+                      o.onSelect(e, sel.getAttribute('data-val'), sel);
+                      setTimeout(function(){
+                        that.sc.style.display = 'none';
+                        that.sc.classList.add("hide");
+                    }, 20); }
                 }
             };
             addEvent(that, 'keydown', that.keydownHandler);
@@ -184,6 +201,7 @@ var autoComplete = (function(){
                     } else {
                         that.last_val = val;
                         that.sc.style.display = 'none';
+                        that.sc.classList.add("hide");
                     }
                 }
             };
