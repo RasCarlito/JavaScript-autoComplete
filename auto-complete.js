@@ -1,5 +1,5 @@
 /*
-    JavaScript autoComplete v1.0.4
+    JavaScript autoComplete v1.0.5
     Copyright (c) 2014 Simon Steinberger / Pixabay
     GitHub: https://github.com/Pixabay/JavaScript-autoComplete
     License: http://www.opensource.org/licenses/mit-license.php
@@ -132,9 +132,10 @@ var autoComplete = (function(){
                     that.sc.innerHTML = s;
                     that.updateSC(0);
                 }
-                else
+                else {
                     that.sc.style.display = 'none';
                     that.sc.classList.add("hide");
+                }
             }
 
             that.keydownHandler = function(e){
